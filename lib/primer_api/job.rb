@@ -42,7 +42,6 @@ module PrimerApi
       else
         PrimerApi.connection.post(self.class.endpoint, attributes)
       end
-      binding.pry
       assign_attributes(request.to_hash)
       self
     end

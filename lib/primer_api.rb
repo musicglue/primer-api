@@ -9,15 +9,17 @@ require 'primer_api/recurring_job'
 require 'primer_api/single_job'
 require 'primer_api/version'
 
+require 'primer_api/railtie' if defined?(Rails)
+
 module PrimerApi
 
   module_function
 
   def config
     ActiveSupport::OrderedOptions.new.tap do |x|
-      x.host = 'http://localhost:3000'
-      x.api_key = '3858797C'
-      x.api_secret = 'zoLfecqHegvj0RJeEfcRJMAGoSq1PPpoSJqUGJh3/uy5EKlNdEIKtqehD0pYBGET4cl7eZle+HJUgOBVryuzcg=='
+      x.host        = 'https://primer.musicglue.com'
+      x.api_key     = nil #'3858797C'
+      x.api_secret  = nil #'zoLfecqHegvj0RJeEfcRJMAGoSq1PPpoSJqUGJh3/uy5EKlNdEIKtqehD0pYBGET4cl7eZle+HJUgOBVryuzcg=='
     end
   end
 
