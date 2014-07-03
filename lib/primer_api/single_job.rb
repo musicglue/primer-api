@@ -16,6 +16,8 @@ module PrimerApi
 
     attr_accessor :next_occurrence
 
+    validates :next_occurrence, presence: true
+
     def attributes
       super.merge({
         next_occurrence: next_occurrence

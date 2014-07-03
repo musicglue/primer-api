@@ -20,6 +20,9 @@ module PrimerApi
 
     attr_accessor :id, :message_topic, :payload
 
+    validates :message_topic, presence: true
+    validates :payload, presence: true
+
     def persisted?
       !!id
     end
@@ -37,6 +40,7 @@ module PrimerApi
     end
 
     def save
+      return false unless valid?
       request = if persisted?
         PrimerApi.connection.put([self.class.endpoint, id].join('/'), attributes)
       else

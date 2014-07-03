@@ -18,6 +18,8 @@ module PrimerApi
 
     attr_accessor :schedule
 
+    validates :schedule, presence: true
+
     def schedule=(value)
       case value
       when Hash

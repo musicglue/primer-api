@@ -12,15 +12,20 @@ require 'primer_api/version'
 require 'primer_api/railtie' if defined?(Rails)
 
 module PrimerApi
+  ROOT_PATH = File.dirname(File.dirname(__FILE__))
 
   module_function
 
   def config
-    ActiveSupport::OrderedOptions.new.tap do |x|
+    @config ||= ActiveSupport::OrderedOptions.new.tap do |x|
       x.host        = 'https://primer.musicglue.com'
-      x.api_key     = nil #'3858797C'
-      x.api_secret  = nil #'zoLfecqHegvj0RJeEfcRJMAGoSq1PPpoSJqUGJh3/uy5EKlNdEIKtqehD0pYBGET4cl7eZle+HJUgOBVryuzcg=='
+      x.api_key     = nil
+      x.api_secret  = nil
     end
+  end
+
+  def env
+    (ENV['RACK_ENV'] || ENV['RAILS_ENV'] || ENV['PRIMER_ENV'] || 'development').inquiry
   end
 
   def configure(&block)
