@@ -47,7 +47,8 @@ module PrimerApi
       def build_headers(payload)
         {
           'Content-MD5' => Digest::MD5.hexdigest(payload.to_json),
-          'Content-Type' => 'text/json',
+          'Content-Type' => 'application/json',
+          'Accept' => 'application/json',
           'Date' => Time.now
         }
       end

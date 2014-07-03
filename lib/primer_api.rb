@@ -5,6 +5,8 @@ require 'rest_client'
 require 'primer_api/response'
 require 'primer_api/client'
 require 'primer_api/job'
+require 'primer_api/recurring_job'
+require 'primer_api/single_job'
 require 'primer_api/version'
 
 module PrimerApi
