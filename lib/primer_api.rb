@@ -1,5 +1,6 @@
 require 'active_support'
 require 'active_support/core_ext'
+require 'api_auth'
 require 'rest_client'
 
 require 'primer_api/response'
