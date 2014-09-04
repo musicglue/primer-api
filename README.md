@@ -81,6 +81,14 @@ Single jobs take the same generic arguments as recurring jobs, `:message_topic, 
   end
 ```
 
+##### Unique Single Jobs
+
+You can enforce uniqueness on a ```SingleJob``` by specifying a string `:unique_key` value. This will ensure that is a job will only ever be created once.
+
+```ruby
+job = PrimerApi::SingleJob.new(unique_key: 'my_unique_key', next_occurrence: 1.day.from_now, message_topic: :your_emmited_topic, payload: {})
+```
+
 ### Updating
 
 In order to update you'll need to have the job ID that was returned during the save operation. Updates work very similarly for both types of job, you just have to supply the changed parameters.
