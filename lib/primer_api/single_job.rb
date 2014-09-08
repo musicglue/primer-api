@@ -12,6 +12,15 @@ module PrimerApi
         new(PrimerApi.connection.get([endpoint, id].join('/')).to_hash.except('schedule'))
       end
 
+      def from_message message, next_occurrence, unique_key = nil
+        new(
+          next_occurrence: next_occurrence, 
+          message_topic: message.topic_name,
+          payload: message.attributes,
+          unique_key: unique_key
+        )
+      end
+
     end
 
     attr_accessor :next_occurrence
