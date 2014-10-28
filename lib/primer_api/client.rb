@@ -39,7 +39,8 @@ module PrimerApi
           url: build_url(path),
           method: method,
           payload: payload.to_json,
-          headers: build_headers(payload))
+          headers: build_headers(payload),
+          ssl_version: 'TLSv1')
 
         PrimerApi::Response.new(ApiAuth.sign!(request, @api_key, @api_secret).execute)
       end
