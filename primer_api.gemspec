@@ -6,8 +6,8 @@ require 'primer_api/version'
 Gem::Specification.new do |spec|
   spec.name          = "primer_api"
   spec.version       = PrimerApi::VERSION
-  spec.authors       = ["Adam Carlile"]
-  spec.email         = ["adam@benchmedia.co.uk"]
+  spec.authors       = ["devteam@musicglue.com"]
+  spec.email         = ["devteam@musicglue.com"]
   spec.summary       = %q{Simplifies the process of putting jobs into Primer.}
   spec.description   = %q{Simplifies the process of putting jobs into Primer.}
   spec.homepage      = ""
@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'activesupport'
   spec.add_runtime_dependency 'activemodel'
-  spec.add_runtime_dependency 'rest_client'
+  spec.add_runtime_dependency 'rest-client'
   spec.add_runtime_dependency 'api-auth'
 
   spec.add_development_dependency "bundler", "~> 1.6"
