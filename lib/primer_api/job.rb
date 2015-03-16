@@ -31,6 +31,7 @@ module PrimerApi
       {
         id: id,
         message_topic: message_topic,
+        headers: headers,
         payload: payload,
         unique_key: unique_key
       }
