@@ -13,7 +13,9 @@ module PrimerApi
       end
 
       def from_message message, next_occurrence, unique_key = nil
-        topic_name = message.to_topic_name if message.respond_to?(:to_topic_name)
+        topic_name = message.class.to_topic_name if message.class.respond_to?(:to_topic_name)
+
+        # remove this eventually
         topic_name = message.topic_name if message.respond_to?(:topic_name)
 
         fail 'Topic name not found.' if topic_name.blank?
