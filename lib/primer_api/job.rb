@@ -18,7 +18,7 @@ module PrimerApi
 
     end
 
-    attr_accessor :id, :message_topic, :payload, :unique_key
+    attr_accessor :id, :message_topic, :payload, :unique_key, :headers
 
     validates :message_topic, presence: true
     validates :payload, presence: true
