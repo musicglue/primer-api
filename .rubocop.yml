@@ -1,0 +1,53 @@
+AllCops:
+  Include:
+    - Rakefile
+  Exclude:
+    - bin/**/*
+    - db/**/*
+    - config/**/*
+    - script/**/*
+    - test/**/*
+    - vendor/**/*
+
+AbcSize:
+  Enabled: false
+
+AmbiguousOperator:
+  Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+DoubleNegation:
+  Enabled: false
+
+Encoding:
+  EnforcedStyle: when_needed
+
+LineLength:
+  Max: 120
+
+MethodDefParentheses:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+MethodLength:
+  Enabled: false
+
+MultilineBlockChain:
+  Enabled: false
+
+Style/RescueModifier:
+  Enabled: false
+
+TrivialAccessors:
+  AllowDSLWriters: true
+  AllowPredicates: true
