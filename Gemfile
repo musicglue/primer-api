@@ -10,7 +10,9 @@ group :development do
 end
 
 group :development, :test do
+  gem 'awesome_print'
   gem 'pry-byebug'
+  gem 'rake'
 end
 
 group :test do
