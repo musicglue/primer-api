@@ -1,5 +1,4 @@
-PrimerApi.configure do |config|
-
+PrimerApi.configure do |_config|
   # Define your access keys for the PrimerApi, if you don't have an access key, you will need to log
   # in to primer and create a new application
 
@@ -11,5 +10,4 @@ PrimerApi.configure do |config|
 
   # This is required, primer_api will not function without it
   # config.api_secret = 'such_sekrets_much_private_wow'
-
 end
