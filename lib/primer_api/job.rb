@@ -1,62 +1,49 @@
 module PrimerApi
-  class Job
-    include ActiveModel::Model
+  class Job < PrimerResource
+    hash_attributes :message_headers, :message_body, :schedule
 
-    class << self
+    validate :ice_cube_schedule_must_be_present
+    validate :message_body_must_be_a_hash
+    validate :message_headers_must_be_a_hash
 
-        def endpoint
-          raise NotImplementedError
-        end
-
-        def find(id)
-          raise NotImplementedError
-        end
-
-        def create(attrs)
-          new(attrs).save
-        end
-
+    before_validation do
+      self.schedule = schedule.to_hash if schedule
     end
 
-    attr_accessor :id, :message_topic, :payload, :unique_key, :headers
+    private
 
-    validates :message_topic, presence: true
-    validates :payload, presence: true
-
-    def persisted?
-      !!id
+    def attribute_present? attribute
+      respond_to?(attribute) && send(attribute)
     end
 
-    def attributes
-      {
-        id: id,
-        message_topic: message_topic,
-        headers: headers,
-        payload: payload,
-        unique_key: unique_key
-      }
+    def ice_cube_hash? hash
+      hash.respond_to?(:keys) && hash.keys.include?('start_time')
     end
 
-    def destroy
-      PrimerApi.connection.delete([self.class.endpoint, id].join('/'))
-    end
-
-    def save
-      return false unless valid?
-      request = if persisted?
-        PrimerApi.connection.put([self.class.endpoint, id].join('/'), attributes)
-      else
-        PrimerApi.connection.post(self.class.endpoint, attributes)
+    def ice_cube_schedule_must_be_present
+      unless attribute_present? :schedule
+        errors.add :schedule, 'must be present'
+        return
       end
-      assign_attributes(request.to_hash)
-      self
+
+      return if ice_cube_hash?(schedule)
+
+      errors.add(:schedule, 'must be a Hash representation of an ice_cube schedule')
     end
 
-    def assign_attributes(values)
-      attributes.keys.each do |key|
-        send("#{key}=", values[key.to_s]) if values[key.to_s]
-      end
+    def message_body_must_be_a_hash
+      optional_attribute_must_be_a_hash :message_body
     end
 
+    def message_headers_must_be_a_hash
+      optional_attribute_must_be_a_hash :message_headers
+    end
+
+    def optional_attribute_must_be_a_hash attribute
+      return unless attribute_present? attribute
+      return if send(attribute).class.in? [Hash, ActiveSupport::HashWithIndifferentAccess]
+
+      errors.add(attribute, 'must be a Hash, if supplied')
+    end
   end
 end
