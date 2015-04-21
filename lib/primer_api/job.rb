@@ -2,6 +2,8 @@ module PrimerApi
   class Job < PrimerResource
     hash_attributes :message_headers, :message_body, :schedule
 
+    validates :message_topic, presence: true
+
     validate :ice_cube_schedule_must_be_present
     validate :message_body_must_be_a_hash
     validate :message_headers_must_be_a_hash

@@ -4,6 +4,7 @@ Job = PrimerApi::Job
 
 describe Job do
   before do
+    @valid_topic = 'do-the-thing'
     @valid_headers = { version: 4 }
     @valid_body = { some_key: 'some value' }
     @valid_schedule = IceCube::Schedule.new.to_hash
@@ -11,11 +12,18 @@ describe Job do
     @job = Job.new(
       message_body: @valid_body,
       message_headers: @valid_headers,
+      message_topic: @valid_topic,
       schedule: @valid_schedule)
   end
 
   it 'can be valid' do
     _(@job).must_be :valid?
+  end
+
+  it 'must have a topic' do
+    @job.message_topic = ''
+
+    _(@job).wont_be :valid?
   end
 
   it 'must have an ice cube schedule' do
@@ -65,12 +73,12 @@ describe Job do
   end
 
   it 'transforms an ice cube schedule assignment into a hash' do
-    job = Job.new
+    job = Job.new message_topic: @valid_topic
     job.schedule = IceCube::Schedule.new
     job.validate
     _(job.schedule).must_be_instance_of ActiveSupport::HashWithIndifferentAccess
 
-    job = Job.new schedule: IceCube::Schedule.new
+    job = Job.new message_topic: @valid_topic, schedule: IceCube::Schedule.new
     job.validate
     _(job.schedule).must_be_instance_of ActiveSupport::HashWithIndifferentAccess
   end
