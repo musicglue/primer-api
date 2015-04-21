@@ -19,7 +19,9 @@ module PrimerApi
     end
 
     def ice_cube_hash? hash
-      hash.respond_to?(:keys) && hash.keys.include?('start_time')
+      hash.respond_to?(:keys) && (
+        hash.keys.include?('start_date') ||
+        hash.keys.include?('start_time'))
     end
 
     def ice_cube_schedule_must_be_present
