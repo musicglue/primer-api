@@ -21,6 +21,13 @@ module PrimerApi
 
   def configure(&_block)
     yield config
+
+    # Primer's api is expecting a root 'job' element
+    # in the request body. If this is not set, things
+    # like unique_key won't be added to the job in Primer,
+    # leading to Bad Things.
+    ActiveResource::Base.include_root_in_json = true
+
     require 'primer_api/primer_resource'
     require 'primer_api/job'
     config
